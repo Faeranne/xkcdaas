@@ -5,10 +5,12 @@ var fs = require('fs')
 var Image = canvas.Image
 
 var languages = {
-  "perl":{file:'perl.png'},
-  "node":{file:'perl.png'},
-  "python":{file:'perl.png'},
-  "ruby":{file:'perl.png'}
+  "perl":{},
+  "node":{},
+  "python":{},
+  "html":{},
+  "java":{},
+  "ruby":{}
 }
 
 function loadLanguages(){
@@ -58,5 +60,5 @@ server.get('/image/:what/:lang', function(req,res){
 });
 
 server.get('/', function(req,res){
-  res.send('API is in the form of /image/:what/:lang wher :what is the activity known and lang is the languate.  Supported languages are python, ruby, node, and perl.  Submit an issue if you would like othr languages supported.');
+  res.send('API is in the form of /image/:what/:lang wher :what is the activity known and lang is the language.  Supported languages are python, ruby, node, html, java, and perl.  Submit an issue if you would like othr languages supported. <a href="http://github.com/blister75/xkcdaas/">Github</a>');
 });
