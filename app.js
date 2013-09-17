@@ -60,5 +60,5 @@ server.get('/image/:what/:lang', function(req,res){
 });
 
 server.get('/', function(req,res){
-  res.send('API is in the form of /image/:what/:lang wher :what is the activity known and lang is the language.  Supported languages are python, ruby, node, html, java, and perl.  Submit an issue if you would like othr languages supported. <a href="http://github.com/blister75/xkcdaas/">Github</a>');
+  res.send('API is in the form of /image/:what/:lang wher :what is the activity known and lang is the language.  Supported languages are python, ruby, node, html, java, and perl.  Submit an issue if you would like othr languages supported.  Original comic from <a href="http://xkcd.com">XKCD</a>  <a href="http://github.com/blister75/xkcdaas/">Github</a>');
 });
