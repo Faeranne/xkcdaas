@@ -13,8 +13,6 @@ var languages = {
 
 function loadLanguages(){
   for(language in languages){
-    console.log(language)
-    console.log(languages);
     image = fs.readFileSync(__dirname + '/'+language+'.png')
     languages[language].Image = new Image;
     languages[language].Image.src = image;
@@ -24,8 +22,8 @@ function loadLanguages(){
 loadLanguages();
 
 var server = express();
-server.listen(8000);
-server.get('/image/:verb/:what/:lang', function(req,res){
+server.listen(process.env.PORT || 8000);
+server.get('/image/:what/:lang', function(req,res){
   res.contentType('image/png');
   var ctx = new canvas(619,442).getContext('2d');
   fs.readFile(__dirname + '/template.png', function(err, template){
@@ -39,7 +37,6 @@ server.get('/image/:verb/:what/:lang', function(req,res){
     while(ctx.measureText(req.params.what).width>120){
      fontSize--;
      var fontArgs = ctx.font.split(' ');
-     console.log(fontArgs)
      var newSize = fontSize+'px';
      ctx.font = newSize + ' ' + fontArgs[fontArgs.length - 1]; /// using the last part
     }
@@ -61,5 +58,5 @@ server.get('/image/:verb/:what/:lang', function(req,res){
 });
 
 server.get('/', function(req,res){
-  res.send('<img src="/image"></img>');
+  res.send('API is in the form of /image/:what/:lang wher :what is the activity known and lang is the languate.  Supported languages are python, ruby, node, and perl.  Submit an issue if you would like othr languages supported.');
 });
