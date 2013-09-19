@@ -10,7 +10,8 @@ var languages = {
   "html":{},
   "java":{},
   "ruby":{},
-  "lisp":{}
+  "lisp":{},
+  "scala":{}
 }
 
 var template = new Image;
