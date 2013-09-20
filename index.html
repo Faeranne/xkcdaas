@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>XKCD as a service</title>
+</head>
+<body>
+  <h1>XKCDaas</h1>
+  <p>xkcd as a service provides an automated way to show different xkcd comics with YOUR words.  By using a server canvas, XKCDaas will automaticly draw out the custom comic every time it is requested.  Listed below are the currently avalible comics.  Just fill in the boxes to get a link to your custom xkcd comic.</p>
+  <h2>208 - I know regex</h2>
+  <form action="/get_image/regex" method="GET">
+    <img src="/208.png" title="Wait, forgot to escape a space.  Wheeeeee[taptaptap]eeeeee."></img><br/>
+    <label>Panel 2 - I know </label><input type="text" name="what"><br/>
+    <label>Panel 4 - language</label><input type="text" name="lang"><br/>
+    <input type='submit'>
+  </form>
+  <form action="/get_image/try" method="GET">
+    <img src="/208-var.png" title="OOPS!"></img><br/>
+    <label>Panel 1 - I'm going to try </label><input type="text" name="what"><br/>
+    <input type='submit'>
+  </form>
+</body>
+</html>
+

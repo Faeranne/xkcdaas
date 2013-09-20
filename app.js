@@ -8,6 +8,10 @@ var trySci = require('./208-var/')
 
 var server = express();
 
+server.configure(function(){
+  server.use(express.static(__dirname + '/public'));
+})
+
 regex.init();
 trySci.init();
 
@@ -42,6 +46,12 @@ server.get('/regex/:what/:lang', function(req,res){
     }
 });
 
+server.get('/get_image/regex',function(req,res){
+  var imageSrc='/regex/'+req.query.what+'/'+req.query.lang
+  var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
+  res.send(html);
+})
+
 server.get('/try/:do', function(req,res){
   var hash = '/tmp/xkcd/images/try/' + crypto.createHash('md5').update(req.url).digest("hex") +'.png'
     if(path.existsSync(hash)){
@@ -63,6 +73,13 @@ server.get('/try/:do', function(req,res){
     }
 });
 
+server.get('/get_image/try',function(req,res){
+  var imageSrc='/try/'+req.query.what
+  var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
+  res.send(html);
+})
+
 server.get('/', function(req,res){
-  res.send('API is depentend on which comic you are using.  Comic 208, "Regular Expressions" and the 208 t-shirt variant, "try Science" are avaible.  208 api is /regex/:what/:lang where :what refers to panel 2 I know ...  :lang is the language in panel 4.  This currently supports the languages python, ruby, node, html, java, and perl.  Submit an issue if you would like othr languages supported. 208 variant api is /try/:what where :what is what to try. Original comics are from <a href="http://xkcd.com">XKCD</a>  <a href="http://github.com/blister75/xkcdaas/">Github</a>');
+  //res.send('API is depentend on which comic you are using.  Comic 208, "Regular Expressions" and the 208 t-shirt variant, "try Science" are avaible.  208 api is /regex/:what/:lang where :what refers to panel 2 I know ...  :lang is the language in panel 4.  This currently supports the languages python, ruby, node, html, java, and perl.  Submit an issue if you would like othr languages supported. 208 variant api is /try/:what where :what is what to try. Original comics are from <a href="http://xkcd.com">XKCD</a>  <a href="http://github.com/blister75/xkcdaas/">Github</a>');
+  res.sendfile(__dirname+"/index.html")
 });

@@ -34,9 +34,11 @@ module.exports.render = function(params){
   shrinkToFit(params.what,120,11,ctx);
   var whatWidth = ctx.measureText(params.what);
   ctx.fillText(params.what,465-(whatWidth.width/2),69);
-  if(languages[params.lang]){
-    ctx.drawImage(languages[params.lang].Image,0,0);
-  }
+  setFontSize(20,ctx);
+  ctx.translate(241,347);
+  ctx.rotate(-35*Math.PI/180)
+  ctx.scale((ctx.measureText(params.lang).width>38)?(38/ctx.measureText(params.lang).width):1,.60);
+  ctx.fillText(params.lang,0,0);
   var stream = ctx.canvas.createPNGStream();
   return stream;
 }
