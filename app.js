@@ -47,7 +47,7 @@ server.get('/regex/:what/:lang', function(req,res){
 });
 
 server.get('/get_image/regex',function(req,res){
-  var imageSrc='/regex/'+req.query.what+'/'+req.query.lang
+  var imageSrc='/regex/'+encodeURIComponent(req.query.what)+'/'+encodeURIComponent(req.query.lang)
   var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
   res.send(html);
 })
@@ -74,7 +74,7 @@ server.get('/try/:do', function(req,res){
 });
 
 server.get('/get_image/try',function(req,res){
-  var imageSrc='/try/'+req.query.what
+  var imageSrc='/try/'+encodeURIComponent(req.query.what)
   var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
   res.send(html);
 })
