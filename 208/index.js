@@ -3,27 +3,11 @@ var fs = require('fs')
 
 var Image = canvas.Image
 
-var languages = {
-  "perl":{},
-  "node":{},
-  "python":{},
-  "html":{},
-  "java":{},
-  "ruby":{},
-  "lisp":{},
-  "scala":{}
-}
-
 var template = new Image;
 
 module.exports.init = function(){
   template.src = fs.readFileSync(__dirname + '/template.png')
   console.log(__dirname + '/template.png')
-  for(language in languages){
-    image = fs.readFileSync(__dirname + '/'+language+'.png')
-    languages[language].Image = new Image;
-    languages[language].Image.src = image;
-  }
 }
 
 module.exports.render = function(params){

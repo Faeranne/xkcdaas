@@ -50,6 +50,32 @@ server.get('/regex/:what/:lang', function(req,res){
     }
 });
 
+server.get('/regex/:what/', function(req,res){
+  req.params.lang = ''
+  console.log('incomming request for:'+req.url);
+  if(req.get('referrer')){
+    console.log('request from:'+req.get('referrer'));
+  }
+  var hash = '/tmp/xkcd/images/regex/' + crypto.createHash('md5').update(req.url).digest("hex") +'.png'
+    if(path.existsSync(hash)){
+       res.contentType('image/png');
+       res.sendfile(hash) 
+    }else{
+       res.contentType('image/png');
+       var stream = regex.render(req.params);
+       var image = null
+       var out = fs.createWriteStream(hash)
+       stream.on('data',function(chunk){
+         res.write(chunk);
+         out.write(chunk);
+       })
+       stream.on('end', function(chunk){
+         res.end()
+         out.end()
+       });
+    }
+});
+
 server.get('/get_image/regex',function(req,res){
   console.log('incomming request for:'+req.url);
   if(req.get('referrer')){
