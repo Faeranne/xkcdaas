@@ -13,6 +13,7 @@ server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
 
+exec("rm $HOME/.fonts/xkcd.ttf",console.log)
 exec("mkdir $HOME/.fonts",console.log)
 exec("ln -s "+__dirname+"/.fonts/* $HOME/.fonts/*",console.log)
 exec("mkfontdir $HOME/.fonts/",console.log)
