@@ -2,6 +2,7 @@ var express = require('express')
 var crypto = require('crypto')
 var path = require('path')
 var fs = require('fs')
+var exec = require('child_process').exec
 
 var regex = require('./208/')
 var trySci = require('./208-var/')
@@ -12,13 +13,17 @@ server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
 
+
 regex.init();
 trySci.init();
+
 
 fs.mkdir('/tmp/xkcd',function(err){
   fs.mkdir('/tmp/xkcd/images/',function(err){
     fs.mkdir('/tmp/xkcd/images/regex/',function(err){
-      fs.mkdir('/tmp/xkcd/images/try/')
+      fs.mkdir('/tmp/xkcd/images/try/',function(err){
+        console.log(err)
+      })
     })
   })
 })

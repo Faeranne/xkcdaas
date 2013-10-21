@@ -10,8 +10,11 @@ module.exports.init = function(){
   console.log(__dirname + '/template.png')
 }
 
+var xkcdFont = new canvas.Font('xkcd','xkcd.ttf')
+
 module.exports.render = function(params){
   var ctx = new canvas(template.width,template.height).getContext('2d');
+  ctx.addFont(xkcdFont)
   ctx.font = "13px xkcd"
   ctx.drawImage(template,0,0);
   setFontSize(14,ctx);

@@ -9,9 +9,11 @@ module.exports.init = function(){
   template.src = fs.readFileSync(__dirname + '/template.png')
   console.log(template)
 }
+var xkcdFont = new canvas.Font('xkcd','xkcd.ttf')
 
 module.exports.render = function(params){
   var ctx = new canvas(template.width,template.height).getContext('2d');
+  ctx.addFont(xkcdFont)
   ctx.font = "13px xkcd"
   ctx.drawImage(template,0,0);
   ctx.fillColor = "white"
