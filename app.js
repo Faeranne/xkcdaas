@@ -13,16 +13,10 @@ server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
 
-exec("rm $HOME/.fonts/xkcd.ttf",console.log)
-exec("mkdir $HOME/.fonts",console.log)
-exec("ln -s "+__dirname+"/.fonts/* $HOME/.fonts/*",console.log)
-exec("mkfontdir $HOME/.fonts/",console.log)
-exec("fc-cache -fv $HOME/.fonts/",console.log)
 
 regex.init();
 trySci.init();
 
-exec("rm -rf /tmp/xkcd",console.log)
 
 fs.mkdir('/tmp/xkcd',function(err){
   fs.mkdir('/tmp/xkcd/images/',function(err){
