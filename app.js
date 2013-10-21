@@ -13,7 +13,8 @@ server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
 
-exec("ln -s "+__dirname+"/.fonts $HOME",console.log)
+exec("mkdir $HOME/.fonts",console.log)
+exec("ln -s "+__dirname+"/.fonts/* $HOME/.fonts/*",console.log)
 exec("mkfontdir $HOME/.fonts/",console.log)
 exec("fc-cache -fv $HOME/.fonts/",console.log)
 
