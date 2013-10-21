@@ -12,6 +12,7 @@ module.exports.init = function(){
 
 module.exports.render = function(params){
   var ctx = new canvas(template.width,template.height).getContext('2d');
+  ctx.font = "13px xkcd"
   ctx.drawImage(template,0,0);
   ctx.fillColor = "white"
   shrinkToFit(params.do,425-77,120,ctx);

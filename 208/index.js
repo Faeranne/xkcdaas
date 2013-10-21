@@ -12,8 +12,9 @@ module.exports.init = function(){
 
 module.exports.render = function(params){
   var ctx = new canvas(template.width,template.height).getContext('2d');
+  ctx.font = "13px xkcd"
   ctx.drawImage(template,0,0);
-  setFontSize(13,ctx);
+  setFontSize(14,ctx);
   ctx.fillText('know',460,56);
   shrinkToFit(params.what,120,11,ctx);
   var whatWidth = ctx.measureText(params.what);
