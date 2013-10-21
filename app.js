@@ -13,9 +13,9 @@ server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
 
-exec("ln -s "+__dirname+"/.fonts $HOME")
-exec("mkfontdir $HOME/.fonts/")
-exec("fc-cache -fv $HOME/.fonts/")
+exec("ln -s "+__dirname+"/.fonts $HOME",console.log)
+exec("mkfontdir $HOME/.fonts/",console.log)
+exec("fc-cache -fv $HOME/.fonts/",console.log)
 
 regex.init();
 trySci.init();
