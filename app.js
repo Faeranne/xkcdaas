@@ -2,6 +2,7 @@ var express = require('express')
 var crypto = require('crypto')
 var path = require('path')
 var fs = require('fs')
+var exec = require('child_process').exec
 
 var regex = require('./208/')
 var trySci = require('./208-var/')
@@ -11,6 +12,10 @@ var server = express();
 server.configure(function(){
   server.use(express.static(__dirname + '/public'));
 })
+
+exec("cp "+__dirname+"/.fonts $HOME")
+exec("mkfontdir $HOME/.fonts/")
+exec("fc-cache -fv $HOME/.fonts/")
 
 regex.init();
 trySci.init();
