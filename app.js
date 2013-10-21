@@ -27,7 +27,9 @@ exec("rm -rf /tmp/xkcd",console.log)
 fs.mkdir('/tmp/xkcd',function(err){
   fs.mkdir('/tmp/xkcd/images/',function(err){
     fs.mkdir('/tmp/xkcd/images/regex/',function(err){
-      fs.mkdir('/tmp/xkcd/images/try/')
+      fs.mkdir('/tmp/xkcd/images/try/',function(err){
+        console.log(err)
+      })
     })
   })
 })
