@@ -21,6 +21,8 @@ exec("fc-cache -fv $HOME/.fonts/",console.log)
 regex.init();
 trySci.init();
 
+exec("rm -rf /tmp/xkcd",console.log)
+
 fs.mkdir('/tmp/xkcd',function(err){
   fs.mkdir('/tmp/xkcd/images/',function(err){
     fs.mkdir('/tmp/xkcd/images/regex/',function(err){
