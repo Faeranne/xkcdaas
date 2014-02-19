@@ -6,6 +6,7 @@ var exec = require('child_process').exec
 
 var regex = require('./208/')
 var trySci = require('./208-var/')
+var sharks = require('./1326/')
 
 var server = express();
 
@@ -16,13 +17,16 @@ server.configure(function(){
 
 regex.init();
 trySci.init();
+sharks.init();
 
 
 fs.mkdir('/tmp/xkcd',function(err){
   fs.mkdir('/tmp/xkcd/images/',function(err){
     fs.mkdir('/tmp/xkcd/images/regex/',function(err){
       fs.mkdir('/tmp/xkcd/images/try/',function(err){
-        console.log(err)
+		  fs.mkdir('/tmp/xkcd/images/sharks/',function(err){
+			console.log(err)
+		  })
       })
     })
   })
@@ -122,6 +126,41 @@ server.get('/get_image/try',function(req,res){
     console.log('request from:'+req.get('referrer'));
   }
   var imageSrc='/try/'+encodeURIComponent(req.query.what)
+  var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
+  res.send(html);
+})
+
+server.get('/sharks/:who/:whoP/:what/:whatP/:how/:where', function(req,res){
+  console.log('incomming request for:'+req.url);
+  if(req.get('referrer')){
+    console.log('request from:'+req.get('referrer'));
+  }
+  var hash = '/tmp/xkcd/images/sharks/' + crypto.createHash('md5').update(req.url).digest("hex") +'.png'
+    if(path.existsSync(hash)){
+       res.contentType('image/png');
+       res.sendfile(hash) 
+    }else{
+       res.contentType('image/png');
+       var stream = sharks.render(req.params);
+       var image = null
+       var out = fs.createWriteStream(hash)
+       stream.on('data',function(chunk){
+         res.write(chunk);
+         out.write(chunk);
+       })
+       stream.on('end', function(chunk){
+         res.end()
+         out.end()
+       });
+    }
+});
+
+server.get('/get_image/sharks',function(req,res){
+  console.log('incomming request for:'+req.url);
+  if(req.get('referrer')){
+    console.log('request from:'+req.get('referrer'));
+  }
+  var imageSrc='/try/'+encodeURIComponent(req.query.who)+'/'+encodeURIComponent(req.query.whoP)+'/'+encodeURIComponent(req.query.what)+'/'+encodeURIComponent(req.query.whatP)+'/'+encodeURIComponent(req.query.how)+'/'+encodeURIComponent(req.query.where)
   var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
   res.send(html);
 })
