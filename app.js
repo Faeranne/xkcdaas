@@ -160,7 +160,7 @@ server.get('/get_image/sharks',function(req,res){
   if(req.get('referrer')){
     console.log('request from:'+req.get('referrer'));
   }
-  var imageSrc='/try/'+encodeURIComponent(req.query.who)+'/'+encodeURIComponent(req.query.whoP)+'/'+encodeURIComponent(req.query.what)+'/'+encodeURIComponent(req.query.whatP)+'/'+encodeURIComponent(req.query.how)+'/'+encodeURIComponent(req.query.where)
+  var imageSrc='/sharks/'+encodeURIComponent(req.query.who)+'/'+encodeURIComponent(req.query.whoP)+'/'+encodeURIComponent(req.query.what)+'/'+encodeURIComponent(req.query.whatP)+'/'+encodeURIComponent(req.query.how)+'/'+encodeURIComponent(req.query.where)
   var html ='<body><img src="'+imageSrc+'"><br/><h2>Paste the HTML below to show off your image.</h2><p>&lt;img src="http://xkcdaas.heroku.com'+imageSrc+'"&gt;</p>'
   res.send(html);
 })
